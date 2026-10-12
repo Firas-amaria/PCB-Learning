@@ -1,0 +1,11 @@
+# Developer caches
+.pio/
+node_modules/
+bin/
+obj/
+*.pdb
+.DS_Store
+Thumbs.db
+.env
+secrets.h
+# Keep the compiled student launcher in the repository.

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Offline bilingual guide to ESP32 and embedded systems">
+    <title>Embedded Learning Hub | دليل الأنظمة المدمجة</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/lessons.js"></script>
+    <script defer src="assets/projects.js"></script>
+    <script defer src="assets/project-view.js"></script>
+    <script defer src="assets/app.js"></script>
+</head>
+
+<body><a class="skip" href="#main">انتقل إلى المحتوى / Skip to content</a>
+    <header><a class="brand" href="#home"><span class="chip">▦</span><span>Embedded Learning Hub<small>دليل الأنظمة
+                    المدمجة</small></span></a>
+        <div class="header-actions"><button id="language" lang="en">English</button><button id="menu"
+                aria-controls="sidebar" aria-expanded="false">☰</button></div>
+    </header>
+    <div class="layout">
+        <aside id="sidebar"><label id="search-label" for="search"></label><input id="search" type="search"
+                autocomplete="off">
+            <div id="results" aria-live="polite"></div>
+            <nav id="nav"></nav>
+            <div class="progress-box"><strong id="progress-label"></strong><progress id="progress" max="100"
+                    value="0"></progress><small id="privacy"></small><button id="reset" class="quiet"></button></div>
+        </aside>
+        <main id="main" tabindex="-1"></main>
+    </div>
+    <div id="notice" role="status"></div>
+    <footer id="footer"></footer>
+</body>
+
+</html>
