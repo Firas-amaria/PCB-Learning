@@ -12,7 +12,7 @@ window.HUB_LESSONS = [
     ],
     why: [
       "Before changing the light-threshold logic, save a working version. If the new behavior fails, the history helps you locate the cause.",
-      "احفظ نسخة تعمل قبل تعديل منطق عتبة الضوء. إذا ظهرت مشكلة، يساعدك سجل التغييرات على تحديد سببها.",
+      "احفظ نسخة تعمل قبل تعديل منطق عتبة (Threshold) الضوء. إذا ظهرت مشكلة، يساعدك سجل التغييرات على تحديد سببها.",
     ],
     concepts: [
       [
@@ -22,63 +22,63 @@ window.HUB_LESSONS = [
         ],
         [
           "Git tracks files and history on your computer. GitHub hosts remote repositories and collaboration tools. A repository is a project plus its history; your local copy and the remote copy can differ until you synchronize them.",
-          "يتابع Git الملفات وتاريخها على حاسوبك. يستضيف GitHub المستودعات البعيدة وأدوات التعاون. المستودع (Repository) هو مشروع مع سجله؛ وقد تختلف النسخة المحلية (Local) عن البعيدة (Remote) حتى تزامنهما.",
+          "يتابع Git الملفات وتاريخها على حاسوبك. يستضيف GitHub المستودعات (Repositories) البعيدة وأدوات التعاون. المستودع (Repository) هو مشروع مع سجله؛ وقد تختلف النسخة المحلية (Local) عن البعيدة (Remote) حتى تزامنهما.",
         ],
       ],
       [
-        ["Clone or ZIP?", "استنساخ أم ZIP؟"],
+        ["Clone or ZIP?", "استنساخ (Clone) أم ZIP؟"],
         [
           "Cloning downloads a Git repository with history and a remote connection. A ZIP contains a snapshot of files, without the Git history or remote setup. Use ZIP to read this hub; clone when you want to contribute and track changes.",
-          "الاستنساخ (Clone) ينزّل المستودع مع تاريخه وربطه بالنسخة البعيدة. ملف ZIP يحتوي لقطة من الملفات دون سجل Git أو إعداد المستودع البعيد. يكفي ZIP لقراءة هذا الدليل؛ استخدم الاستنساخ للمساهمة وتتبع تعديلاتك.",
+          "الاستنساخ (Clone) ينزّل المستودع (Repository) مع تاريخه وربطه بالنسخة البعيدة. ملف ZIP يحتوي لقطة من الملفات دون سجل Git أو إعداد المستودع (Repository) البعيد. يكفي ZIP لقراءة هذا الدليل؛ استخدم الاستنساخ (Clone) للمساهمة وتتبع تعديلاتك.",
         ],
       ],
       [
         ["Edit → stage → commit → synchronize", "عدّل ← جهّز ← احفظ ← زامن"],
         [
           "Editing changes your working files. Staging selects changes for the next commit. A commit records those selected changes locally. Pull brings remote changes into your branch; push sends your local commits to the remote. Review status and diff before committing. A diff line starting with minus was removed; plus was added.",
-          "التعديل يغيّر ملفات العمل. التجهيز (Stage) يختار التغييرات للحفظ التالي. الالتزام (Commit) يحفظها محليًا. السحب (Pull) يدمج تغييرات المستودع البعيد في فرعك، والدفع (Push) يرسل التزاماتك إليه. راجع الحالة (Status) والفروق (Diff) قبل الحفظ: السالب سطر محذوف والموجب سطر مضاف.",
+          "التعديل يغيّر ملفات العمل. التجهيز (Stage) يختار التغييرات للحفظ التالي. الالتزام (Commit) يحفظها محليًا. السحب (Pull) يدمج تغييرات المستودع (Repository) البعيد في فرعك (Branch)، والدفع (Push) يرسل التزاماتك (Commits) إليه. راجع الحالة (Status) والفروق (Diff) قبل الحفظ: السالب سطر محذوف والموجب سطر مضاف.",
         ],
       ],
       [
-        ["Branches, access, and secrets", "الفروع والصلاحيات والأسرار"],
+        ["Branches, access, and secrets", "الفروع (Branches) والصلاحيات والأسرار"],
         [
           "A branch is a separate line of work, useful for experimenting without changing the main branch. Owning a clone does not grant write access to the original repository. Use a repository you own or have permission to write to. Ignore generated .pio/ files and secrets such as Wi-Fi passwords. .gitignore only prevents untracked matching files from being added; it does not erase a committed secret. Revoke or rotate a real exposed secret immediately, then coordinate history cleanup.",
-          "الفرع (Branch) مسار عمل منفصل للتجربة دون تعديل الفرع الرئيسي. امتلاك نسخة مستنسخة لا يمنحك صلاحية الدفع إلى الأصل. استخدم مستودعك أو مستودعًا لديك إذن بالكتابة فيه. تجاهل الملفات المولّدة مثل .pio/ والأسرار مثل كلمات مرور Wi-Fi. يمنع .gitignore إضافة الملفات المطابقة غير المتتبعة، لكنه لا يمحو سرًا سبق حفظه. ألغِ السر المكشوف أو بدّله فورًا، ثم نسّق تنظيف السجل.",
+          "الفرع (Branch) مسار عمل منفصل للتجربة دون تعديل الفرع (Branch) الرئيسي. امتلاك نسخة مستنسخة (Clone) لا يمنحك صلاحية الدفع (Push) إلى المستودع الأصلي (Original repository). استخدم مستودعك (Repository) أو مستودعًا (Repository) لديك إذن بالكتابة فيه. تجاهل الملفات المولّدة مثل .pio/ والأسرار مثل كلمات مرور Wi-Fi. يمنع .gitignore إضافة الملفات المطابقة غير المتتبعة، لكنه لا يمحو سرًا سبق حفظه. ألغِ السر المكشوف أو بدّله فورًا، ثم نسّق تنظيف السجل.",
         ],
       ],
     ],
     codeLabel: [
       "Terminal · guided workflow · Git installed, writable repository required",
-      "الطرفية · خطوات موجهة · يلزم Git ومستودع قابل للكتابة",
+      "الطرفية · خطوات موجهة · يلزم Git ومستودع (Repository) قابل للكتابة",
     ],
     code: 'git clone YOUR_WRITABLE_REPOSITORY_URL\ncd YOUR_REPOSITORY_FOLDER\ngit status\ngit pull --ff-only\n# Edit README.md in your editor\ngit diff\ngit add README.md\ngit diff --staged\ngit commit -m "Explain light threshold behavior"\ngit push',
     explain: [
       "Replace the two uppercase placeholders with your own repository URL and folder. Edit README.md before staging it. Stage a named file rather than everything. The commit message describes the result. If pull refuses because histories diverged, stop and ask your instructor before rewriting history.",
-      "استبدل القيمتين المكتوبتين بأحرف كبيرة برابط مستودعك ومجلده. عدّل README.md قبل تجهيزه. جهّز ملفًا محددًا بدل كل الملفات. تصف رسالة الالتزام النتيجة. إذا رفض السحب بسبب تفرع السجل، اطلب مساعدة المدرّس قبل إعادة كتابة التاريخ.",
+      "استبدل القيمتين المكتوبتين بأحرف كبيرة برابط مستودعك (Repository) ومجلده. عدّل README.md قبل تجهيزه (Stage). جهّز ملفًا محددًا بدل كل الملفات. تصف رسالة الالتزام (Commit) النتيجة. إذا رفض السحب (Pull) بسبب تفرع السجل، اطلب مساعدة المدرّس قبل إعادة كتابة التاريخ.",
     ],
     exercise: [
       "In your own repository, add a sentence describing when the LED turns on. Inspect the diff, commit it, and find the commit on GitHub after pushing. Add .pio/ and secrets.h to .gitignore before creating those files.",
-      "أضف في مستودعك جملة تصف متى يضيء LED. راجع الفرق، واحفظ التزامًا، ثم ابحث عنه في GitHub بعد الدفع. أضف .pio/ وsecrets.h إلى .gitignore قبل إنشاء هذه الملفات.",
+      "أضف في مستودعك (Repository) جملة تصف متى يضيء LED. راجع الفرق (Diff)، واحفظ التزامًا (Commit)، ثم ابحث عنه في GitHub بعد الدفع (Push). أضف .pio/ وsecrets.h إلى .gitignore قبل إنشاء هذه الملفات.",
     ],
     trouble: [
       [
-        ["Push rejected", "رُفض الدفع"],
+        ["Push rejected", "رُفض الدفع (Push)"],
         [
           "Check the remote URL and your write permission. If someone pushed first, pull and resolve conflicts with help. Do not force-push to bypass the problem.",
-          "تحقق من رابط المستودع وصلاحية الكتابة. إذا دفع شخص آخر قبلك، اسحب التغييرات وعالج التعارض بمساعدة. لا تستخدم الدفع القسري لتجاوز المشكلة.",
+          "تحقق من رابط المستودع (Repository) وصلاحية الكتابة. إذا دفع شخص آخر قبلك، اسحب التغييرات وعالج التعارض بمساعدة. لا تستخدم الدفع القسري (Force push) لتجاوز المشكلة.",
         ],
       ],
       [
-        ["My file is missing from the commit", "ملفي غير موجود في الالتزام"],
+        ["My file is missing from the commit", "ملفي غير موجود في الالتزام (Commit)"],
         [
           "Run git status and git diff --staged. An edited file must be staged before committing; ignored files may not appear as untracked.",
-          "نفّذ git status وgit diff --staged. يجب تجهيز الملف المعدّل قبل الالتزام؛ وقد لا تظهر الملفات المتجاهَلة كملفات غير متتبعة.",
+          "نفّذ git status وgit diff --staged. يجب تجهيز الملف المعدّل قبل الالتزام (Commit)؛ وقد لا تظهر الملفات المتجاهَلة كملفات غير متتبعة.",
         ],
       ],
     ],
     extra: [
       "Use git switch -c threshold-experiment to create an experimental branch. Keep commits small enough that one message explains each change.",
-      "أنشئ فرعًا للتجربة باستخدام git switch -c threshold-experiment. اجعل كل التزام صغيرًا بحيث تكفي رسالة واحدة لشرح تغييره.",
+      "أنشئ فرعًا (Branch) للتجربة باستخدام git switch -c threshold-experiment. اجعل كل التزام (Commit) صغيرًا بحيث تكفي رسالة واحدة لشرح تغييره.",
     ],
     checks: [
       ["Explain Git versus GitHub", "أشرح الفرق بين Git وGitHub"],
@@ -99,7 +99,7 @@ window.HUB_LESSONS = [
         "Pro Git: recording changes",
         "Pro Git: تسجيل التغييرات",
         "Understand status, staging, and commits.",
-        "فهم الحالة والتجهيز والالتزامات.",
+        "فهم الحالة والتجهيز (Stage) والالتزامات (Commits).",
       ],
     ],
   },
@@ -135,7 +135,7 @@ window.HUB_LESSONS = [
       [
         [
           "Functions make a decision reusable",
-          "الدوال تجعل القرار قابلًا لإعادة الاستخدام",
+          "الدوال (Functions) تجعل القرار قابلًا لإعادة الاستخدام",
         ],
         [
           "A function packages a task. Parameters are its inputs; a return value is its output. shouldLight(1250, 1800) returns true because 1250 is below 1800. Keeping the decision separate from reading the sensor makes it easier to reason about.",
@@ -161,7 +161,7 @@ window.HUB_LESSONS = [
     ],
     exercise: [
       "Predict the result when raw equals threshold, then try it in the sensor simulation in section 7. Change < to <= on paper: which case changes?",
-      "توقع النتيجة عندما تساوي القراءة العتبة، ثم جرّبها في محاكاة الحساس بالقسم 7. استبدل < بـ <= على الورق: أي حالة تتغير؟",
+      "توقع النتيجة عندما تساوي القراءة العتبة (Threshold)، ثم جرّبها في محاكاة الحساس بالقسم 7. استبدل < بـ <= على الورق: أي حالة تتغير؟",
     ],
     trouble: [
       [
@@ -184,12 +184,12 @@ window.HUB_LESSONS = [
     ],
     extra: [
       "The server can use a different language from the device. They agree on a data contract, not on sharing the same source code.",
-      "يمكن أن يستخدم الخادم لغة مختلفة عن الجهاز. يتفق الطرفان على عقد للبيانات، وليس على شيفرة مصدر واحدة.",
+      "يمكن أن يستخدم الخادم لغة مختلفة عن الجهاز. يتفق الطرفان على عقد للبيانات (Data contract)، وليس على شيفرة مصدر واحدة.",
     ],
     checks: [
       [
         "Trace a comparison, loop, and function call",
-        "أتتبع مقارنة وحلقة واستدعاء دالة",
+        "أتتبع مقارنة وحلقة واستدعاء دالة (Function)",
       ],
       [
         "Locate device, server, and browser responsibilities",
@@ -220,11 +220,11 @@ window.HUB_LESSONS = [
     prereq: ["basics"],
     intro: [
       "The ESP32 is a microcontroller: it runs firmware, reads inputs, and controls outputs. PlatformIO organizes the project and its build tools.",
-      "ESP32 متحكّم دقيق (Microcontroller) يشغّل برنامجًا ثابتًا ويقرأ المدخلات ويتحكم بالمخرجات. ينظّم PlatformIO المشروع وأدوات بنائه.",
+      "ESP32 متحكّم دقيق (Microcontroller) يشغّل برنامجًا ثابتًا (Firmware) ويقرأ المدخلات ويتحكم بالمخرجات. ينظّم PlatformIO المشروع وأدوات بنائه.",
     ],
     why: [
       "A repeatable build and readable serial messages let you separate code problems from connection and wiring problems.",
-      "يساعدك البناء القابل للتكرار والخرج التسلسلي الواضح على فصل مشكلات الشيفرة عن مشكلات الاتصال والتوصيل.",
+      "يساعدك البناء (Build) القابل للتكرار والخرج التسلسلي (Serial output) الواضح على فصل مشكلات الشيفرة عن مشكلات الاتصال والتوصيل.",
     ],
     concepts: [
       [
@@ -238,21 +238,21 @@ window.HUB_LESSONS = [
         ["Know the files", "اعرف الملفات"],
         [
           "platformio.ini selects environments, platform, board, framework, monitor speed, and lib_deps dependencies. src/ holds source files such as main.cpp; include/ holds project headers; lib/ holds private libraries. .pio/ is generated build output. Keep the tested dependency versions from the starter.",
-          "يحدد platformio.ini بيئات البناء والمنصة واللوحة وإطار العمل وسرعة المراقبة وتبعيات lib_deps. يحتوي src/ ملفات المصدر مثل main.cpp، وinclude/ ترويسات المشروع، وlib/ المكتبات الخاصة. أما .pio/ فناتج بناء مولّد. احتفظ بإصدارات التبعيات المجرّبة في المشروع الأولي.",
+          "يحدد platformio.ini بيئات البناء (Build environments) والمنصة واللوحة وإطار العمل (Framework) وسرعة المراقبة وتبعيات (Dependencies) lib_deps. يحتوي src/ ملفات المصدر مثل main.cpp، وinclude/ ترويسات (Header files) المشروع، وlib/ المكتبات الخاصة. أما .pio/ فناتج بناء (Build) مولّد. احتفظ بإصدارات التبعيات (Dependencies) المجرّبة في المشروع الأولي.",
         ],
       ],
       [
         ["Build, upload, observe", "ابنِ وارفع وراقب"],
         [
           "Build compiles and links the program without sending it to the board. Upload transfers the firmware over the selected connection. Serial Monitor displays messages from the running device; its baud rate must match Serial.begin. Select the starter’s environment and the correct device port.",
-          "البناء (Build) يترجم البرنامج ويربطه دون إرساله إلى اللوحة. الرفع (Upload) ينقل البرنامج الثابت عبر الاتصال المحدد. تعرض المراقبة التسلسلية (Serial Monitor) رسائل الجهاز أثناء التشغيل؛ ويجب أن تطابق سرعتها Serial.begin. اختر بيئة المشروع الأولي ومنفذ الجهاز الصحيح.",
+          "البناء (Build) يترجم البرنامج ويربطه دون إرساله إلى اللوحة. الرفع (Upload) ينقل البرنامج الثابت (Firmware) عبر الاتصال المحدد. تعرض المراقبة التسلسلية (Serial Monitor) رسائل الجهاز أثناء التشغيل؛ ويجب أن تطابق سرعتها Serial.begin. اختر بيئة المشروع الأولي ومنفذ (Port) الجهاز الصحيح.",
         ],
       ],
       [
-        ["Framework and timing matter", "إطار العمل والتوقيت مهمان"],
+        ["Framework and timing matter", "إطار العمل (Framework) والتوقيت مهمان"],
         [
           "Arduino calls setup() once and loop() repeatedly. Native ESP-IDF enters app_main() and commonly uses FreeRTOS tasks. These frameworks are not interchangeable by pasting code unchanged. In Arduino, configure verified pins with descriptive constants and pinMode in setup. A long delay blocks that task from checking inputs or processing application messages promptly.",
-          "يستدعي Arduino الدالة setup() مرة واحدة وloop() مرارًا. يبدأ ESP-IDF الأصلي من app_main() ويستخدم عادة مهام FreeRTOS. لا تنتقل الشيفرة بين الإطارين بمجرد لصقها دون تعديل. في Arduino اضبط الأطراف الموثقة بثوابت واضحة وpinMode داخل setup. يؤخر delay الطويل فحص المدخلات ومعالجة رسائل التطبيق في المهمة نفسها.",
+          "يستدعي Arduino الدالة (Function) setup() مرة واحدة وloop() مرارًا. يبدأ ESP-IDF الأصلي من app_main() ويستخدم عادة مهام FreeRTOS. لا تنتقل الشيفرة بين الإطارين (Frameworks) بمجرد لصقها دون تعديل. في Arduino اضبط الأطراف الموثقة بثوابت واضحة وpinMode داخل setup. يؤخر delay الطويل فحص المدخلات ومعالجة رسائل التطبيق في المهمة نفسها.",
         ],
       ],
     ],
@@ -267,28 +267,28 @@ window.HUB_LESSONS = [
     ],
     exercise: [
       "Build the serial-only exercise in a separate copy of the starter. Upload it and open Serial Monitor at 115200. Change the reporting interval to 500 ms and predict the output frequency.",
-      "ابنِ التجربة التسلسلية في نسخة منفصلة من المشروع الأولي. ارفعها وافتح المراقبة التسلسلية بسرعة 115200. غيّر الفاصل إلى 500 ملّي ثانية وتوقع تردد الرسائل.",
+      "ابنِ التجربة التسلسلية في نسخة منفصلة من المشروع الأولي. ارفعها وافتح المراقبة التسلسلية (Serial Monitor) بسرعة 115200. غيّر الفاصل إلى 500 ملّي ثانية وتوقع تردد الرسائل.",
     ],
     trouble: [
       [
-        ["Build error", "خطأ بناء"],
+        ["Build error", "خطأ بناء (Build)"],
         [
           "Read the first meaningful compiler error: check spelling, missing headers, dependencies, and framework. A USB cable cannot fix a compile error.",
-          "اقرأ أول خطأ ترجمة مفيد: تحقق من الأسماء والترويسات والتبعيات وإطار العمل. كابل USB لا يصلح خطأ ترجمة.",
+          "اقرأ أول خطأ ترجمة مفيد: تحقق من الأسماء والترويسات (Header files) والتبعيات (Dependencies) وإطار العمل (Framework). كابل USB لا يصلح خطأ ترجمة.",
         ],
       ],
       [
-        ["Upload error", "خطأ رفع"],
+        ["Upload error", "خطأ رفع (Upload)"],
         [
           "Check a data-capable USB cable, selected port, port ownership, and the instructor’s boot procedure. Close other monitors holding the port.",
-          "تحقق من كابل USB يدعم البيانات والمنفذ المختار والبرامج التي تستخدمه وإجراء الإقلاع لدى المدرّس. أغلق برامج المراقبة الأخرى التي تحجز المنفذ.",
+          "تحقق من كابل USB يدعم البيانات والمنفذ (Port) المختار والبرامج التي تستخدمه وإجراء الإقلاع لدى المدرّس. أغلق برامج المراقبة الأخرى التي تحجز المنفذ (Port).",
         ],
       ],
       [
-        ["Uploaded but wrong behavior", "تم الرفع لكن السلوك خاطئ"],
+        ["Uploaded but wrong behavior", "تم الرفع (Upload) لكن السلوك خاطئ"],
         [
           "Check runtime serial output, baud rate, power, and the selected environment. Successful upload does not prove wiring or logic is correct.",
-          "راجع رسائل التشغيل وسرعة الاتصال والتغذية والبيئة المختارة. نجاح الرفع لا يثبت صحة التوصيل أو المنطق.",
+          "راجع رسائل التشغيل وسرعة الاتصال والتغذية والبيئة المختارة. نجاح الرفع (Upload) لا يثبت صحة التوصيل أو المنطق.",
         ],
       ],
     ],
@@ -303,11 +303,11 @@ window.HUB_LESSONS = [
       ],
       [
         "Distinguish build, upload, and runtime failures",
-        "أميز أعطال البناء والرفع والتشغيل",
+        "أميز أعطال البناء (Build) والرفع (Upload) والتشغيل",
       ],
       [
         "Identify the framework before using an example",
-        "أحدد إطار العمل قبل استخدام مثال",
+        "أحدد إطار العمل (Framework) قبل استخدام مثال",
       ],
     ],
     resources: [
@@ -338,17 +338,17 @@ window.HUB_LESSONS = [
     ],
     concepts: [
       [
-        ["Router, IP, and port", "الموجّه والعنوان والمنفذ"],
+        ["Router, IP, and port", "الموجّه (Router) والعنوان والمنفذ (Port)"],
         [
           "A router links networks; a home router often also provides Wi-Fi and assigns local addresses. An IP identifies a network interface. A port identifies a service on that host. Our example laptop is 192.168.1.20 with a server on port 3000; example ESP32 is 192.168.1.42. These are examples, not your actual addresses.",
-          "يربط الموجّه (Router) الشبكات؛ وغالبًا يوفر الموجّه المنزلي Wi-Fi ويوزّع العناوين المحلية. يحدد عنوان IP واجهة شبكة، ويحدد المنفذ (Port) خدمة على ذلك المضيف. حاسوب المثال هو 192.168.1.20 وخادمه على المنفذ 3000؛ وESP32 في المثال هو 192.168.1.42. هذه أمثلة وليست عناوين أجهزتك الفعلية.",
+          "يربط الموجّه (Router) الشبكات؛ وغالبًا يوفر الموجّه (Router) المنزلي Wi-Fi ويوزّع العناوين المحلية. يحدد عنوان IP واجهة شبكة، ويحدد المنفذ (Port) خدمة على ذلك المضيف (Host). حاسوب المثال هو 192.168.1.20 وخادمه على المنفذ (Port) 3000؛ وESP32 في المثال هو 192.168.1.42. هذه أمثلة وليست عناوين أجهزتك الفعلية.",
         ],
       ],
       [
         ["Read a URL", "اقرأ عنوان URL"],
         [
           "In http://192.168.1.20:3000/api/readings/latest, http is the scheme, 192.168.1.20 the host, 3000 the port, and /api/readings/latest the path. DNS translates names such as example.com into network addresses. A local IP usually cannot be reached directly from the public internet.",
-          "في http://192.168.1.20:3000/api/readings/latest يمثل http البروتوكول، و192.168.1.20 المضيف، و3000 المنفذ، و/api/readings/latest المسار. يحوّل DNS أسماء مثل example.com إلى عناوين شبكية. لا يمكن عادة الوصول المباشر إلى عنوان محلي من الإنترنت العام.",
+          "في http://192.168.1.20:3000/api/readings/latest يمثل http البروتوكول، و192.168.1.20 المضيف (Host)، و3000 المنفذ (Port)، و/api/readings/latest المسار. يحوّل DNS أسماء مثل example.com إلى عناوين شبكية. لا يمكن عادة الوصول المباشر إلى عنوان محلي من الإنترنت العام.",
         ],
       ],
       [
@@ -365,7 +365,7 @@ window.HUB_LESSONS = [
         ["Check reachability in layers", "افحص الوصول خطوة بخطوة"],
         [
           "Connect both devices to the intended network, check Wi-Fi status and their assigned IPs, then confirm the server is running. Open its endpoint on the laptop and then from another permitted device. A successful ping only checks some network reachability, not whether the API is running; some networks block ping. Recheck the IP after reconnecting.",
-          "صل الجهازين بالشبكة المطلوبة وافحص حالة Wi-Fi وعناوينهما، ثم تأكد من تشغيل الخادم. افتح نقطة النهاية على الحاسوب ثم من جهاز آخر مسموح. نجاح ping لا يثبت تشغيل API؛ كما أن بعض الشبكات تمنعه. أعد فحص العنوان بعد إعادة الاتصال.",
+          "صل الجهازين بالشبكة المطلوبة وافحص حالة Wi-Fi وعناوينهما، ثم تأكد من تشغيل الخادم. افتح نقطة النهاية (Endpoint) على الحاسوب ثم من جهاز آخر مسموح. نجاح ping لا يثبت تشغيل API؛ كما أن بعض الشبكات تمنعه. أعد فحص العنوان بعد إعادة الاتصال.",
         ],
       ],
     ],
@@ -376,25 +376,25 @@ window.HUB_LESSONS = [
     code: "Laptop: 192.168.1.20 (example)\nESP32:  192.168.1.42 (example)\nServer: port 3000\n\nhttp://192.168.1.20:3000/api/readings/latest",
     explain: [
       "Replace the example laptop IP with its actual local address. Use the same host and port in the ESP32 configuration. Opening this hub does not start that server.",
-      "استبدل عنوان الحاسوب في المثال بعنوانه المحلي الفعلي. استخدم المضيف والمنفذ نفسيهما في إعداد ESP32. فتح هذا الدليل لا يشغّل ذلك الخادم.",
+      "استبدل عنوان الحاسوب في المثال بعنوانه المحلي الفعلي. استخدم المضيف (Host) والمنفذ (Port) نفسيهما في إعداد ESP32. فتح هذا الدليل لا يشغّل ذلك الخادم.",
     ],
     exercise: [
       "Draw the laptop, router, and ESP32. Label each address and the server port. Explain what localhost means on each device.",
-      "ارسم الحاسوب والموجّه وESP32. اكتب العناوين ومنفذ الخادم. اشرح معنى localhost على كل جهاز.",
+      "ارسم الحاسوب والموجّه (Router) وESP32. اكتب العناوين ومنفذ (Port) الخادم. اشرح معنى localhost على كل جهاز.",
     ],
     trouble: [
       [
         ["Connection refused or timeout", "رفض اتصال أو انتهاء مهلة"],
         [
           "Check the actual IP and port, whether the server is running, and whether it listens beyond loopback. A wrong port may reach a different service.",
-          "تحقق من IP والمنفذ الفعليين وتشغيل الخادم واستماعه خارج عنوان الاسترجاع المحلي. قد يصلك المنفذ الخاطئ بخدمة أخرى.",
+          "تحقق من IP والمنفذ (Port) الفعليين وتشغيل الخادم واستماعه خارج عنوان الاسترجاع المحلي (Loopback). قد يصلك المنفذ (Port) الخاطئ بخدمة أخرى.",
         ],
       ],
       [
         ["Works on laptop only", "يعمل على الحاسوب فقط"],
         [
           "Guest Wi-Fi can isolate clients. Use the instructor-approved network and a narrowly scoped firewall rule for the server port on the trusted private network. Do not disable the firewall as a general fix.",
-          "قد تعزل شبكة الضيوف الأجهزة عن بعضها. استخدم شبكة المقرر المسموحة وقاعدة جدار ناري محددة لمنفذ الخادم على الشبكة الخاصة الموثوقة. لا تعطّل الجدار الناري كحل عام.",
+          "قد تعزل شبكة الضيوف الأجهزة عن بعضها. استخدم شبكة المقرر المسموحة وقاعدة جدار ناري (Firewall) محددة لمنفذ (Port) الخادم على الشبكة الخاصة الموثوقة. لا تعطّل الجدار الناري (Firewall) كحل عام.",
         ],
       ],
       [
@@ -410,14 +410,14 @@ window.HUB_LESSONS = [
       "قد تتغير العناوين التي يوزعها DHCP. اسأل المدرّس عن حجز عنوان أو حدّث إعداد العميل عندما يتغير عنوان الحاسوب.",
     ],
     checks: [
-      ["Explain host, port, and path", "أشرح المضيف والمنفذ والمسار"],
+      ["Explain host, port, and path", "أشرح المضيف (Host) والمنفذ (Port) والمسار"],
       [
         "Use the laptop IP from another device",
         "أستخدم عنوان الحاسوب من جهاز آخر",
       ],
       [
         "Troubleshoot without disabling the firewall",
-        "أشخّص المشكلة دون تعطيل الجدار الناري",
+        "أشخّص المشكلة دون تعطيل الجدار الناري (Firewall)",
       ],
     ],
     resources: [
@@ -448,14 +448,14 @@ window.HUB_LESSONS = [
     ],
     concepts: [
       [
-        ["One project, one contract", "مشروع واحد وعقد بيانات واحد"],
+        ["One project, one contract", "مشروع واحد وعقد بيانات (Data contract) واحد"],
         [
           "POST /api/readings submits a reading. GET /api/readings/latest retrieves the latest accepted reading without changing it. An endpoint combines a method and route. Our JSON object has deviceId (string), lightRaw (integer 0–4095 in this 12-bit simulation), and ledOn (Boolean). Numbers and true/false are not quoted strings.",
           "يرسل POST /api/readings قراءة. ويجلب GET /api/readings/latest أحدث قراءة مقبولة دون تغييرها. تجمع نقطة النهاية (Endpoint) طريقة الطلب ومساره (Route). يحتوي كائن JSON على deviceId كنص، وlightRaw كعدد صحيح من 0 إلى 4095 في محاكاتنا ذات 12 بت، وledOn كقيمة منطقية. الأعداد وtrue/false ليست نصوصًا بين علامتي اقتباس.",
         ],
       ],
       [
-        ["Headers and validation", "الترويسات والتحقق"],
+        ["Headers and validation", "الترويسات (Headers) والتحقق"],
         [
           "Content-Type: application/json describes the body format. The server parses JSON, checks required keys and types, rejects invalid data, and only then stores the latest reading. Our example returns 200 and the accepted object for a valid POST; GET returns 200 and that object, or 404 if no reading exists yet. Storage can be in memory and disappear on restart.",
           "تصف Content-Type: application/json صيغة جسم الرسالة. يحلل الخادم JSON ويتحقق من المفاتيح المطلوبة وأنواعها ويرفض البيانات غير الصالحة، ثم يخزن أحدث قراءة. يعيد عقدنا 200 والكائن المقبول عند POST صالح؛ ويعيد GET الكائن مع 200 أو 404 إذا لم توجد قراءة بعد. قد يكون التخزين في الذاكرة ويزول بإعادة التشغيل.",
@@ -475,7 +475,7 @@ window.HUB_LESSONS = [
         ["Browser CORS", "قيود CORS في المتصفح"],
         [
           "Browsers restrict cross-origin response access. An origin includes scheme, host, and port. A backend must explicitly allow the intended browser origin when needed; file pages can have a null origin. Do not disable browser security or use no-cors to read JSON. Serve a real project UI from the backend or configure a specific development origin. ESP32 HTTP clients are not subject to browser CORS.",
-          "تقيّد المتصفحات قراءة الاستجابات بين الأصول المختلفة عبر CORS. يشمل الأصل البروتوكول والمضيف والمنفذ. يجب أن يسمح الخادم بأصل المتصفح المقصود عند الحاجة؛ وقد يكون أصل صفحات الملفات null. لا تعطّل حماية المتصفح ولا تستخدم no-cors لقراءة JSON. قدّم واجهة المشروع الحقيقي من الخادم أو اضبط أصل تطوير محددًا. عميل HTTP على ESP32 لا يخضع لقيود CORS الخاصة بالمتصفح.",
+          "تقيّد المتصفحات قراءة الاستجابات بين الأصول المختلفة عبر CORS. يشمل الأصل (Origin) البروتوكول والمضيف (Host) والمنفذ (Port). يجب أن يسمح الخادم بأصل المتصفح المقصود عند الحاجة؛ وقد يكون أصل صفحات الملفات null. لا تعطّل حماية المتصفح ولا تستخدم no-cors لقراءة JSON. قدّم واجهة المشروع الحقيقي من الخادم أو اضبط أصل تطوير محددًا. عميل HTTP على ESP32 لا يخضع لقيود CORS الخاصة بالمتصفح.",
         ],
       ],
     ],
@@ -506,17 +506,17 @@ window.HUB_LESSONS = [
         ["fetch failed", "فشل fetch"],
         [
           "Separate a network timeout from HTTP errors and CORS. Check the browser console, server availability, route, and allowed origin. fetch does not reject automatically for 404 or 500.",
-          "ميّز انتهاء مهلة الشبكة عن أخطاء HTTP وCORS. راجع وحدة تحكم المتصفح وتوفر الخادم والمسار والأصل المسموح. لا ترفض fetch تلقائيًا عند 404 أو 500.",
+          "ميّز انتهاء مهلة الشبكة عن أخطاء HTTP وCORS. راجع وحدة تحكم المتصفح (Browser console) وتوفر الخادم والمسار والأصل (Origin) المسموح. لا ترفض fetch تلقائيًا عند 404 أو 500.",
         ],
       ],
     ],
     extra: [
       "The extra JavaScript function below is an illustrative browser helper, not a standalone page. Its caller must await latest(), display the result, and catch errors. The timeout is always cleared, even when parsing fails.",
-      "دالة JavaScript الإضافية أدناه مساعد توضيحي للمتصفح وليست صفحة مستقلة. يجب على المستدعي انتظار latest() وعرض النتيجة والتقاط الأخطاء. يُلغى المؤقت دائمًا حتى عند فشل التحليل.",
+      "دالة (Function) JavaScript الإضافية أدناه مساعد توضيحي للمتصفح وليست صفحة مستقلة. يجب على المستدعي انتظار latest() وعرض النتيجة والتقاط الأخطاء. يُلغى المؤقت دائمًا حتى عند فشل التحليل.",
     ],
     checks: [
       ["Create a correctly typed JSON object", "أنشئ كائن JSON بأنواع صحيحة"],
-      ["Explain GET, POST, and status codes", "أشرح GET وPOST ورموز الحالة"],
+      ["Explain GET, POST, and status codes", "أشرح GET وPOST ورموز الحالة (Status codes)"],
       [
         "Distinguish backend requirements from the offline hub",
         "أميز متطلبات الخادم عن دليل التعلم المحلي",
@@ -530,7 +530,7 @@ window.HUB_LESSONS = [
         "HTTP overview",
         "نظرة عامة على HTTP",
         "Understand requests, responses, and headers.",
-        "فهم الطلبات والاستجابات والترويسات.",
+        "فهم الطلبات (Requests) والاستجابات (Responses) والترويسات (Headers).",
       ],
       [
         "https://academy.hsoub.com/programming/general/%D9%85%D8%AF%D8%AE%D9%84-%D8%A5%D9%84%D9%89-http-r73/",
@@ -616,7 +616,7 @@ window.HUB_LESSONS = [
     checks: [
       [
         "Compare polling with a persistent connection",
-        "أقارن الاستطلاع بالاتصال المستمر",
+        "أقارن الاستطلاع (Polling) بالاتصال المستمر",
       ],
       [
         "Send only when the connection is open",
@@ -647,7 +647,7 @@ window.HUB_LESSONS = [
     prereq: ["basics", "esp32"],
     intro: [
       "GPIO means general-purpose input/output. A pin can read or drive a digital signal; suitable ADC pins can measure an analog voltage.",
-      "GPIO اختصار للإدخال والإخراج العام. يمكن للطرف قراءة إشارة رقمية أو إخراجها؛ وتستطيع الأطراف المناسبة لمحوّل ADC قياس جهد تماثلي.",
+      "GPIO اختصار للإدخال والإخراج العام. يمكن للطرف قراءة إشارة رقمية (Digital signal) أو إخراجها؛ وتستطيع الأطراف المناسبة لمحوّل ADC قياس جهد تماثلي (Analog voltage).",
     ],
     why: [
       "A sensor turns a physical condition into an electrical signal. Your program interprets it and decides what the LED should do.",
@@ -671,11 +671,11 @@ window.HUB_LESSONS = [
       [
         [
           "Analog signals and a photoresistor",
-          "الإشارات التماثلية والمقاومة الضوئية",
+          "الإشارات التماثلية والمقاومة الضوئية (Photoresistor)",
         ],
         [
           "An ADC converts voltage into a raw number, not lux. A photoresistor changes resistance with light and needs a voltage divider. With a photoresistor toward 3.3V and a fixed resistor toward GND, darkness increases the photoresistor resistance and lowers the midpoint voltage. Reversing the divider reverses the reading direction. Use an instructor-approved divider and ADC configuration; full-scale range and useful accuracy depend on the chip and attenuation.",
-          "يحوّل ADC الجهد إلى عدد خام وليس إلى لوكس. تتغير مقاومة المقاومة الضوئية (Photoresistor) مع الضوء وتحتاج إلى مقسّم جهد (Voltage divider). عندما تتصل المقاومة الضوئية نحو 3.3V والمقاومة الثابتة نحو GND، تزيد مقاومتها في الظلام وينخفض جهد النقطة الوسطى. عكس ترتيب المقسّم يعكس اتجاه القراءة. استخدم مقسّمًا وإعداد ADC معتمدين من المدرّس؛ فالمدى والدقة يعتمدان على الشريحة والتوهين.",
+          "يحوّل ADC الجهد إلى عدد خام وليس إلى لوكس. تتغير مقاومة المقاومة الضوئية (Photoresistor) مع الضوء وتحتاج إلى مقسّم جهد (Voltage divider). عندما تتصل المقاومة الضوئية (Photoresistor) نحو 3.3V والمقاومة الثابتة نحو GND، تزيد مقاومتها في الظلام وينخفض جهد النقطة الوسطى. عكس ترتيب المقسّم يعكس اتجاه القراءة. استخدم مقسّمًا وإعداد ADC معتمدين من المدرّس؛ فالمدى والدقة يعتمدان على الشريحة والتوهين.",
         ],
       ],
       [
@@ -685,7 +685,7 @@ window.HUB_LESSONS = [
         ],
         [
           "Configure verified pins first, read the ADC, interpret direction, compare with a threshold, then drive the LED. Print raw readings over Serial while changing the light to choose a useful threshold. A temperature sensor is different: a digital sensor returns protocol data; an analog sensor outputs a sensor-specific voltage. Do not reuse the photoresistor threshold or call a raw ADC value degrees. This lesson makes no generic analog temperature conversion.",
-          "اضبط الأطراف الموثقة أولًا، ثم اقرأ ADC، وفسّر الاتجاه، وقارن بالعتبة، ثم تحكم في LED. اطبع القراءات الخام عبر Serial أثناء تغيير الضوء لاختيار عتبة مفيدة. حساس الحرارة مختلف: الرقمي يعيد بيانات ببروتوكول، والتماثلي يخرج جهدًا يعتمد على نوع الحساس. لا تعِد استخدام عتبة المقاومة الضوئية ولا تسمّ قراءة ADC درجات حرارة. لا يقدم هذا الدرس تحويلًا عامًا للحرارة التماثلية.",
+          "اضبط الأطراف الموثقة أولًا، ثم اقرأ ADC، وفسّر الاتجاه، وقارن بالعتبة (Threshold)، ثم تحكم في LED. اطبع القراءات الخام عبر Serial أثناء تغيير الضوء لاختيار عتبة (Threshold) مفيدة. حساس الحرارة مختلف: الرقمي يعيد بيانات ببروتوكول، والتماثلي يخرج جهدًا يعتمد على نوع الحساس. لا تعِد استخدام عتبة (Threshold) المقاومة الضوئية (Photoresistor) ولا تسمّ قراءة ADC درجات حرارة. لا يقدم هذا الدرس تحويلًا عامًا للحرارة التماثلية.",
         ],
       ],
     ],
@@ -696,11 +696,11 @@ window.HUB_LESSONS = [
     code: "// Define LIGHT_ADC_PIN and LED_PIN in the tested starter.\nconst int DARK_THRESHOLD = 1800;\n\n// In setup():\npinMode(LED_PIN, OUTPUT);\n\n// In loop(), at your chosen sampling interval:\nint lightRaw = analogRead(LIGHT_ADC_PIN);\nbool ledOn = lightRaw < DARK_THRESHOLD;\ndigitalWrite(LED_PIN, ledOn ? HIGH : LOW);\nSerial.println(lightRaw);",
     explain: [
       "This is not a complete sketch. It assumes an active-high external LED circuit and lower readings in darkness. Use the approved resistor, ADC setup, pin definitions, and Serial initialization from the course starter. 1800 is an example threshold, not a calibration.",
-      "هذا ليس برنامجًا كاملًا. يفترض دائرة LED خارجية تعمل عند HIGH وأن القراءة الأقل تعني الظلام. استخدم المقاومة وإعداد ADC وتعريفات الأطراف وتهيئة Serial المعتمدة في المشروع الأولي. القيمة 1800 عتبة مثال وليست معايرة.",
+      "هذا ليس برنامجًا كاملًا. يفترض دائرة LED خارجية تعمل عند HIGH وأن القراءة الأقل تعني الظلام. استخدم المقاومة وإعداد ADC وتعريفات الأطراف وتهيئة Serial المعتمدة في المشروع الأولي. القيمة 1800 عتبة (Threshold) مثال وليست معايرة (Calibration).",
     ],
     exercise: [
       "In the simulation set raw to 1250 and threshold to 1800. Raise raw until the LED turns off. Then make raw equal the threshold. Explain each JSON field.",
-      "اضبط القراءة الخام في المحاكاة على 1250 والعتبة على 1800. ارفع القراءة حتى ينطفئ LED، ثم اجعلها مساوية للعتبة. اشرح كل حقل في JSON.",
+      "اضبط القراءة الخام في المحاكاة على 1250 والعتبة (Threshold) على 1800. ارفع القراءة حتى ينطفئ LED، ثم اجعلها مساوية للعتبة (Threshold). اشرح كل حقل في JSON.",
     ],
     trouble: [
       [
@@ -714,13 +714,13 @@ window.HUB_LESSONS = [
         ["LED behaves backwards or flickers", "LED يعمل بالعكس أو يومض"],
         [
           "Check polarity, active-low versus active-high wiring, divider direction, and readings near the threshold. A button may also bounce; handle debounce in a real input application.",
-          "افحص القطبية والتشغيل عند LOW أو HIGH واتجاه المقسّم والقراءات القريبة من العتبة. قد يهتز تلامس الزر أيضًا؛ عالج ارتداد التلامس في التطبيق الفعلي.",
+          "افحص القطبية والتشغيل عند LOW أو HIGH واتجاه المقسّم والقراءات القريبة من العتبة (Threshold). قد يهتز تلامس الزر أيضًا؛ عالج ارتداد التلامس في التطبيق الفعلي.",
         ],
       ],
     ],
     extra: [
       "To reduce threshold flicker, use hysteresis: turn on below 1700, turn off above 1900, and keep the previous state between those values. These are example raw thresholds, not lux measurements.",
-      "لتقليل الوميض قرب العتبة، استخدم التخلفية (Hysteresis): شغّل تحت 1700 وأطفئ فوق 1900 واحتفظ بالحالة السابقة بينهما. هذه عتبات خام توضيحية وليست قياسات لوكس.",
+      "لتقليل الوميض قرب العتبة (Threshold)، استخدم التخلفية (Hysteresis): شغّل تحت 1700 وأطفئ فوق 1900 واحتفظ بالحالة السابقة بينهما. هذه عتبات خام توضيحية وليست قياسات لوكس.",
     ],
     checks: [
       [
@@ -729,11 +729,11 @@ window.HUB_LESSONS = [
       ],
       [
         "Distinguish digital, analog, and calibrated values",
-        "أميز القيم الرقمية والتماثلية والمعايرة",
+        "أميز القيم الرقمية والتماثلية والمعايرة (Calibration)",
       ],
       [
         "Predict the threshold decision and divider direction",
-        "أتوقع قرار العتبة واتجاه مقسّم الجهد",
+        "أتوقع قرار العتبة (Threshold) واتجاه مقسّم الجهد (Voltage divider)",
       ],
     ],
     resources: [
@@ -778,7 +778,7 @@ const additionalResources = {
       "git commit reference",
       "مرجع git commit",
       "Look up staging and commit options after practicing the workflow.",
-      "مرجع خيارات الالتزام بعد تجربة خطوات العمل.",
+      "مرجع خيارات الالتزام (Commit) بعد تجربة خطوات العمل.",
     ],
   ],
   basics: [
@@ -805,9 +805,9 @@ const additionalResources = {
       "AR",
       "tutorial",
       "C++ functions — Harmash",
-      "الدوال في C++ — هرمش",
+      "الدوال (Functions) في C++ — هرمش",
       "Understand function inputs, calls, and returned values.",
-      "افهم مدخلات الدوال واستدعاءها وقيمها المعادة.",
+      "افهم مدخلات الدوال (Functions) واستدعاءها وقيمها المعادة.",
     ],
   ],
   esp32: [
@@ -816,18 +816,18 @@ const additionalResources = {
       "AR",
       "tutorial",
       "ESP32 variables and Serial — Robojax",
-      "متغيرات ESP32 والمراقبة التسلسلية — Robojax",
+      "متغيرات ESP32 والمراقبة التسلسلية (Serial Monitor) — Robojax",
       "Arabic written explanation of types and Serial output. Uses a different kit; keep the course board configuration. Embedded video language may differ.",
-      "شرح مكتوب بالعربية للأنواع والخرج التسلسلي. يستخدم عدة مختلفة؛ احتفظ بإعداد لوحة المقرر. قد تختلف لغة الفيديو المضمّن.",
+      "شرح مكتوب بالعربية للأنواع والخرج التسلسلي (Serial output). يستخدم عدة مختلفة؛ احتفظ بإعداد لوحة المقرر. قد تختلف لغة الفيديو المضمّن.",
     ],
     [
       "https://docs.platformio.org/en/latest/core/quickstart.html",
       "EN",
       "docs",
       "PlatformIO build and upload workflow",
-      "خطوات البناء والرفع في PlatformIO",
+      "خطوات البناء (Build) والرفع (Upload) في PlatformIO",
       "Optional command reference for build, upload, and monitoring; use the tested starter instead of the example board.",
-      "مرجع أوامر اختياري للبناء والرفع والمراقبة؛ استخدم المشروع المجرّب بدل لوحة المثال.",
+      "مرجع أوامر اختياري للبناء (Build) والرفع (Upload) والمراقبة؛ استخدم المشروع المجرّب بدل لوحة المثال.",
     ],
   ],
   network: [

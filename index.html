@@ -10,13 +10,18 @@
     <script defer src="assets/lessons.js"></script>
     <script defer src="assets/projects.js"></script>
     <script defer src="assets/project-view.js"></script>
+    <script defer src="assets/hebrew.js"></script>
     <script defer src="assets/app.js"></script>
 </head>
 
 <body><a class="skip" href="#main">انتقل إلى المحتوى / Skip to content</a>
-    <header><a class="brand" href="#home"><span class="chip">▦</span><span>Embedded Learning Hub<small>دليل الأنظمة
+    <header><a class="brand" href="#home"><span class="chip">▦</span><span><bdi dir="ltr">Embedded Learning Hub</bdi><small>دليل الأنظمة
                     المدمجة</small></span></a>
-        <div class="header-actions"><button id="language" lang="en">English</button><button id="menu"
+        <div class="header-actions"><select id="language" aria-label="اللغة">
+                <option value="ar" lang="ar" dir="rtl" selected>العربية</option>
+                <option value="en" lang="en" dir="ltr">English</option>
+                <option value="he" lang="he" dir="rtl">עברית</option>
+            </select><button id="menu"
                 aria-controls="sidebar" aria-expanded="false">☰</button></div>
     </header>
     <div class="layout">

@@ -28,7 +28,7 @@
   } catch (_) {
     storageOK = false;
   }
-  let lang = memory.lang === "en" ? "en" : "ar";
+  let lang = ["en", "ar", "he"].includes(memory.lang) ? memory.lang : "ar";
   if (
     !memory.checks ||
     typeof memory.checks !== "object" ||
@@ -41,10 +41,14 @@
     Array.isArray(memory.projectChecks)
   )
     memory.projectChecks = {};
-  const t = (pair) => pair[lang === "en" ? 0 : 1];
+  const t = (pair) => lang === "he"
+    ? window.HUB_HE[pair[0]] ?? pair[0]
+    : pair[lang === "en" ? 0 : 1];
   const text = (en, ar) => t([en, ar]);
+  const format = (en, ar, values) => text(en, ar).replace(/\{(\w+)\}/g, (_, key) => values[key]);
   function notice(message) {
     $("notice").textContent = message;
+    isolateText($("notice"));
   }
   function save() {
     memory.lang = lang;
@@ -63,12 +67,28 @@
   }
   const prose = (s) =>
     escape(s).replace(
-      /\b(?:[A-Za-z_][A-Za-z0-9_]*(?:[.:/()=-][A-Za-z0-9_./():=-]*)*|\d+(?:\.\d+){3})\b/g,
-      (token) => `<bdi dir="ltr">${token}</bdi>`,
+      /\([A-Za-z][A-Za-z0-9 &;.+/=-]*\)|\b(?:[A-Za-z_][A-Za-z0-9_]*(?:[.:/()=-][A-Za-z0-9_./():=-]*)*|\d+(?:\.\d+){3})\b/g,
+      (token) => token.startsWith("(")
+        ? `<bdi dir="ltr" lang="en" class="technical-term">${token}</bdi>`
+        : `<bdi dir="ltr">${token}</bdi>`,
     );
+  // Apply the same bidi isolation to inline UI translations as to lesson prose.
+  function isolateText(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!node.parentElement.closest("bdi, pre, code, script, style, select") && /[A-Za-z]/.test(node.data)) nodes.push(node);
+    }
+    for (const node of nodes) {
+      const template = document.createElement("template");
+      template.innerHTML = prose(node.data);
+      node.replaceWith(template.content);
+    }
+  }
   const title = (id) => t(lessons.find((l) => l.id === id).title);
   const link = (id, label) =>
-    `<a href="#${id}">${escape(label || title(id))}</a>`;
+    `<a href="#${id}">${prose(label || title(id))}</a>`;
   function flow(active = "") {
     return `<div class="flow" aria-label="${text("Shared project data flow", "تدفق بيانات المشروع المشترك")}">${[
       ["sensor", "Light sensor", "حساس الضوء", "Input", "مدخل"],
@@ -78,7 +98,7 @@
     ]
       .map(
         (x, i) =>
-          `${i ? '<b aria-hidden="true">' + (lang === "ar" ? "←" : "→") + "</b>" : ""}<span class="${active === x[0] ? "stage" : ""}" data-stage="${x[0]}">${text(x[1], x[2])}<small>${text(x[3], x[4])}</small></span>`,
+          `${i ? '<b aria-hidden="true">' + (lang !== "en" ? "←" : "→") + "</b>" : ""}<span class="${active === x[0] ? "stage" : ""}" data-stage="${x[0]}">${text(x[1], x[2])}<small>${text(x[3], x[4])}</small></span>`,
       )
       .join("")}</div>`;
   }
@@ -96,31 +116,30 @@
       "aria-label",
       text("Learning progress", "تقدم التعلم"),
     );
-    $("progress-label").textContent = text(
-      `Your progress · ${done}/${total}`,
-      `تقدمك · ${done}/${total}`,
-    );
+    $("progress-label").textContent = format("Your progress · {done}/{total}", "تقدمك · {done}/{total}", { done, total });
   }
   function shell(id) {
     document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-    $("language").textContent = lang === "ar" ? "English" : "العربية";
-    $("language").lang = lang === "ar" ? "en" : "ar";
+    document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+    $("language").value = lang;
+    document.querySelector(".brand small").textContent = text("Embedded systems guide", "دليل الأنظمة المدمجة");
+    document.querySelector(".skip").textContent = text("Skip to content", "انتقل إلى المحتوى");
+    $("language").setAttribute("aria-label", text("Language", "اللغة"));
     $("menu").setAttribute(
       "aria-label",
       text("Toggle subject menu", "فتح قائمة المواضيع وإغلاقها"),
     );
     $("search-label").textContent = text("Find a concept", "ابحث عن مفهوم");
     $("search").placeholder = text(
-      "Search in Arabic or English…",
-      "ابحث بالعربية أو الإنجليزية…",
+      "Search in Arabic, English, or Hebrew…",
+      "ابحث بالعربية أو الإنجليزية أو العبرية…",
     );
     $("nav").innerHTML =
       `<a href="#home" ${id === "home" ? 'class="active" aria-current="page"' : ""}>⌂ ${text("Learning home", "الرئيسية")}</a>` +
       lessons
         .map(
           (l) =>
-            `<a href="#${l.id}" ${id === l.id ? 'class="active" aria-current="page"' : ""}><span>${l.icon}</span>${escape(t(l.title))}</a>`,
+            `<a href="#${l.id}" ${id === l.id ? 'class="active" aria-current="page"' : ""}><span>${l.icon}</span>${prose(t(l.title))}</a>`,
         )
         .join("");
     $("privacy").textContent = text(
@@ -137,14 +156,14 @@
   }
   function home() {
     const last = lessons.find((l) => l.id === memory.last);
-    return `<section class="hero"><span class="eyebrow">${text("YOUR EMBEDDED SYSTEMS FIELD GUIDE", "دليلك العملي للأنظمة المدمجة")}</span><h1>${text("Small concepts.<br>Real things you can build.", "مفاهيم بسيطة.<br>مشاريع تستطيع بناءها.")}</h1><p class="lead">${text("Revisit a lesson, connect the dots, and take your next step with ESP32. Eight chapters: seven practical subjects and three project ideas, at your own pace.", "راجع درسًا، واربط الأفكار، وخذ خطوتك التالية مع ESP32. ثمانية فصول: سبعة مواضيع عملية وثلاث أفكار مشاريع، بالسرعة التي تناسبك.")}</p><div class="actions"><a class="button primary" href="#git">${text("Start with Git", "ابدأ مع Git")} ${lang === "ar" ? "←" : "→"}</a><a class="button" href="#home/subjects">${text("Find a subject", "اختر موضوعًا")}</a>${last ? `<a class="button" href="#${last.id}">${text("Continue: ", "تابع: ")}${escape(t(last.title))}</a>` : ""}</div><p class="tag">${text("Fully offline lessons & simulations · No accounts · No setup", "دروس ومحاكاة دون إنترنت · دون حسابات · دون إعداد")}</p></section><h2>${text("One project connects it all", "مشروع واحد يجمع الأفكار")}</h2><p>${text("Light sensor → ESP32 → server → webpage. The device controls an LED using a light threshold; the webpage shows its reading and state.", "حساس الضوء ← ESP32 ← الخادم ← صفحة الويب. يتحكم الجهاز في LED باستخدام عتبة ضوء، وتعرض الصفحة القراءة والحالة.")}</p>${flow()}<h2 id="subjects">${text("Your learning path", "مسارك للتعلم")}</h2><p>${text("Follow the order below, or jump straight to the subject you need. Nothing is locked.", "اتبع الترتيب أدناه، أو انتقل مباشرة إلى الموضوع الذي تحتاجه. جميع الأقسام متاحة دائمًا.")}</p><div class="cards">${lessons.map((l) => `<a class="card" href="#${l.id}"><span class="number">${l.icon} / 08 · ${l.time} ${text("MIN", "دقيقة")}</span><h3>${escape(t(l.title))} ${lang === "ar" ? "←" : "→"}</h3><p>${prose(t(l.intro))}</p></a>`).join("")}</div>`;
+    return `<section class="hero"><span class="eyebrow">${text("YOUR EMBEDDED SYSTEMS FIELD GUIDE", "دليلك العملي للأنظمة المدمجة")}</span><h1>${text("Small concepts.<br>Real things you can build.", "مفاهيم بسيطة.<br>مشاريع تستطيع بناءها.")}</h1><p class="lead">${text("Revisit a lesson, connect the dots, and take your next step with ESP32. Eight chapters: seven practical subjects and three project ideas, at your own pace.", "راجع درسًا، واربط الأفكار، وخذ خطوتك التالية مع ESP32. ثمانية فصول: سبعة مواضيع عملية وثلاث أفكار مشاريع، بالسرعة التي تناسبك.")}</p><div class="actions"><a class="button primary" href="#git">${text("Start with Git", "ابدأ مع Git")} ${lang !== "en" ? "←" : "→"}</a><a class="button" href="#home/subjects">${text("Find a subject", "اختر موضوعًا")}</a>${last ? `<a class="button" href="#${last.id}">${text("Continue: ", "تابع: ")}${prose(t(last.title))}</a>` : ""}</div><p class="tag">${text("Fully offline lessons & simulations · No accounts · No setup", "دروس ومحاكاة دون إنترنت · دون حسابات · دون إعداد")}</p></section><h2>${text("One project connects it all", "مشروع واحد يجمع الأفكار")}</h2><p>${text("Light sensor → ESP32 → server → webpage. The device controls an LED using a light threshold; the webpage shows its reading and state.", "حساس الضوء ← ESP32 ← الخادم ← صفحة الويب. يتحكم الجهاز في LED باستخدام عتبة ضوء، وتعرض الصفحة القراءة والحالة.")}</p>${flow()}<h2 id="subjects">${text("Your learning path", "مسارك للتعلم")}</h2><p>${text("Follow the order below, or jump straight to the subject you need. Nothing is locked.", "اتبع الترتيب أدناه، أو انتقل مباشرة إلى الموضوع الذي تحتاجه. جميع الأقسام متاحة دائمًا.")}</p><div class="cards">${lessons.map((l) => `<a class="card" href="#${l.id}"><span class="number">${l.icon} / 08 · ${l.time} ${text("MIN", "دقيقة")}</span><h3>${prose(t(l.title))} ${lang !== "en" ? "←" : "→"}</h3><p>${prose(t(l.intro))}</p></a>`).join("")}</div>`;
   }
   function codeBlock(code, label) {
-    return `<div class="code-wrap"><div class="code-head"><span>${escape(label)}</span><button class="copy">${text("Copy", "نسخ")}</button></div><pre tabindex="0"><code>${escape(code)}</code></pre></div>`;
+    return `<div class="code-wrap"><div class="code-head"><span>${prose(label)}</span><button class="copy">${text("Copy", "نسخ")}</button></div><pre tabindex="0"><code>${escape(code)}</code></pre></div>`;
   }
   function lesson(l) {
     const n = lessons.indexOf(l);
-    return `<article class="lesson"><span class="eyebrow">${text("SUBJECT", "الموضوع")} ${l.icon} / 08 · ${l.time} ${text("MIN READ + PRACTICE", "دقيقة للقراءة والتجربة")}</span><h1>${escape(t(l.title))}</h1><p class="lead">${prose(t(l.intro))}</p><div class="anchor-links"><a href="#${l.id}/concepts">${text("Essentials", "الأساسيات")}</a><a href="#${l.id}/practice">${text("Try it", "جرّب بنفسك")}</a><a href="#${l.id}/troubleshoot">${text("Troubleshoot", "حل المشكلات")}</a><a href="#${l.id}/checklist">${text("Checklist", "قائمة التحقق")}</a></div><div class="intro"><h3>${text("Why this matters", "لماذا يهمك هذا؟")}</h3><p>${prose(t(l.why))}</p><strong>${text("Before you begin: ", "قبل أن تبدأ: ")}</strong>${l.prereq.length ? l.prereq.map((id) => link(id)).join(" · ") : text("No previous lesson needed.", "لا تحتاج إلى درس سابق.")}</div><h2 id="concepts">${text("The essentials", "المفاهيم الأساسية")}</h2>${l.concepts.map((c) => `<section class="concept"><h3>${escape(t(c[0]))}</h3><p>${prose(t(c[1]))}</p></section>`).join("")}<h2>${text("A small example", "مثال صغير")}</h2>${codeBlock(l.code, t(l.codeLabel))}<p>${prose(t(l.explain))}</p>${l.id === "gpio" ? sensor() : l.id === "websockets" ? socketDemo() : ""}<section class="exercise" id="practice"><span class="eyebrow">${text("LEARN BY DOING", "تعلّم بالتجربة")}</span><h3>${text("Try it yourself", "جرّب بنفسك")}</h3><p>${prose(t(l.exercise))}</p></section><h2 id="troubleshoot">${text("When things go wrong", "عندما لا تسير الأمور كما توقعت")}</h2>${l.trouble.map((c) => `<details><summary>${escape(t(c[0]))}</summary><p>${prose(t(c[1]))}</p></details>`).join("")}<h2>${text("A little deeper", "خطوة أعمق")}</h2><p>${prose(t(l.extra))}</p>${l.extraCode ? codeBlock(l.extraCode, text("JavaScript · browser helper · backend and caller required", "JavaScript · مساعد للمتصفح · يلزم خادم وشيفرة تستدعيه")) : ""}<h2 id="checklist">${text("Can you do this?", "هل تستطيع فعل هذا؟")}</h2>${l.checks.map((c, i) => `<label class="check"><input type="checkbox" data-check="${l.id}-${i}" ${memory.checks[l.id + "-" + i] === true ? "checked" : ""}><span>${escape(t(c))}</span></label>`).join("")}<h2>${text("Keep exploring", "للمزيد من التعلم")}</h2><p class="tag">${text("Optional reading · Your language first · Internet required · Links researched October 12, 2026", "قراءة اختيارية · المراجع العربية أولًا · تتطلب الإنترنت · بُحثت الروابط في 12 أكتوبر 2026")}</p><ul class="resources">${[
+    return `<article class="lesson"><span class="eyebrow">${text("SUBJECT", "الموضوع")} ${l.icon} / 08 · ${l.time} ${text("MIN READ + PRACTICE", "دقيقة للقراءة والتجربة")}</span><h1>${prose(t(l.title))}</h1><p class="lead">${prose(t(l.intro))}</p><div class="anchor-links"><a href="#${l.id}/concepts">${text("Essentials", "الأساسيات")}</a><a href="#${l.id}/practice">${text("Try it", "جرّب بنفسك")}</a><a href="#${l.id}/troubleshoot">${text("Troubleshoot", "حل المشكلات")}</a><a href="#${l.id}/checklist">${text("Checklist", "قائمة التحقق")}</a></div><div class="intro"><h3>${text("Why this matters", "لماذا يهمك هذا؟")}</h3><p>${prose(t(l.why))}</p><strong>${text("Before you begin: ", "قبل أن تبدأ: ")}</strong>${l.prereq.length ? l.prereq.map((id) => link(id)).join(" · ") : text("No previous lesson needed.", "لا تحتاج إلى درس سابق.")}</div><h2 id="concepts">${text("The essentials", "المفاهيم الأساسية")}</h2>${l.concepts.map((c) => `<section class="concept"><h3>${prose(t(c[0]))}</h3><p>${prose(t(c[1]))}</p></section>`).join("")}<h2>${text("A small example", "مثال صغير")}</h2>${codeBlock(l.code, t(l.codeLabel))}<p>${prose(t(l.explain))}</p>${l.id === "gpio" ? sensor() : l.id === "websockets" ? socketDemo() : ""}<section class="exercise" id="practice"><span class="eyebrow">${text("LEARN BY DOING", "تعلّم بالتجربة")}</span><h3>${text("Try it yourself", "جرّب بنفسك")}</h3><p>${prose(t(l.exercise))}</p></section><h2 id="troubleshoot">${text("When things go wrong", "عندما لا تسير الأمور كما توقعت")}</h2>${l.trouble.map((c) => `<details><summary>${prose(t(c[0]))}</summary><p>${prose(t(c[1]))}</p></details>`).join("")}<h2>${text("A little deeper", "خطوة أعمق")}</h2><p>${prose(t(l.extra))}</p>${l.extraCode ? codeBlock(l.extraCode, text("JavaScript · browser helper · backend and caller required", "JavaScript · مساعد للمتصفح · يلزم خادم وشيفرة تستدعيه")) : ""}<h2 id="checklist">${text("Can you do this?", "هل تستطيع فعل هذا؟")}</h2>${l.checks.map((c, i) => `<label class="check"><input type="checkbox" data-check="${l.id}-${i}" ${memory.checks[l.id + "-" + i] === true ? "checked" : ""}><span>${prose(t(c))}</span></label>`).join("")}<h2>${text("Keep exploring", "للمزيد من التعلم")}</h2><p class="tag">${text("Optional reading · Your language first · Internet required · Links researched October 12, 2026", "قراءة اختيارية · المراجع العربية أولًا · تتطلب الإنترنت · بُحثت الروابط في 12 أكتوبر 2026")}</p><ul class="resources">${[
       ...l.resources,
     ]
       .sort(
@@ -152,11 +171,11 @@
       )
       .map(
         (r) =>
-          `<li><a href="${r[0]}" target="_blank" rel="noopener noreferrer">${escape(r[lang === "en" ? 3 : 4])} ↗</a><small>${r[1] === "EN" ? text("English", "الإنجليزية") : text("Arabic", "العربية")} · ${r[2] === "video" ? text("Video", "فيديو") : r[2] === "course" ? text("Course", "دورة") : r[2] === "docs" ? text("Documentation", "توثيق") : r[2] === "book" ? text("Book", "كتاب") : text("Tutorial", "درس")} — ${escape(r[lang === "en" ? 5 : 6])}</small></li>`,
+          `<li><a href="${r[0]}" target="_blank" rel="noopener noreferrer">${prose(t([r[3], r[4]]))} ↗</a><small>${r[1] === "EN" ? text("English", "الإنجليزية") : text("Arabic", "العربية")} · ${r[2] === "video" ? text("Video", "فيديو") : r[2] === "course" ? text("Course", "دورة") : r[2] === "docs" ? text("Documentation", "توثيق") : r[2] === "book" ? text("Book", "كتاب") : text("Tutorial", "درس")} — ${prose(t([r[5], r[6]]))}</small></li>`,
       )
       .join(
         "",
-      )}</ul>${!l.resources.some((r) => r[1] === "AR") ? `<p class="tag">${text("No suitable Arabic external resource was verified for this section. The full lesson above is available in Arabic.", "لم نتحقق من مرجع عربي خارجي مناسب لهذا القسم. الدرس أعلاه متاح كاملًا بالعربية.")}</p>` : ""}<div class="pager"><a href="#${n ? lessons[n - 1].id : "home"}">${text("Previous: ", "السابق: ")}${n ? escape(t(lessons[n - 1].title)) : text("Home", "الرئيسية")}</a>${n < lessons.length - 1 ? `<a href="#${lessons[n + 1].id}">${text("Next: ", "التالي: ")}${escape(t(lessons[n + 1].title))}</a>` : `<a href="#home">${text("Back to learning home", "العودة للرئيسية")}</a>`}</div></article>`;
+      )}</ul>${lang !== "en" && !l.resources.some((r) => r[1] === lang.toUpperCase()) ? `<p class="tag">${text("No suitable external resource in this language was verified for this section. The full lesson above is available in your selected language.", "لم نتحقق من مرجع عربي خارجي مناسب لهذا القسم. الدرس أعلاه متاح كاملًا بالعربية.")}</p>` : ""}<div class="pager"><a href="#${n ? lessons[n - 1].id : "home"}">${text("Previous: ", "السابق: ")}${n ? prose(t(lessons[n - 1].title)) : text("Home", "الرئيسية")}</a>${n < lessons.length - 1 ? `<a href="#${lessons[n + 1].id}">${text("Next: ", "التالي: ")}${prose(t(lessons[n + 1].title))}</a>` : `<a href="#home">${text("Back to learning home", "العودة للرئيسية")}</a>`}</div></article>`;
   }
   function sensor() {
     return `<section class="demo"><span class="eyebrow">${text("OFFLINE SIMULATION · NO HARDWARE", "محاكاة محلية · دون عتاد")}</span><h2>${text("Find the light threshold", "اكتشف عتبة الضوء")}</h2><p>${text("This simulated 12-bit reading assumes lower means darker. Reversing the physical voltage divider reverses that relationship. These are raw values, not lux.", "تفترض هذه القراءة المحاكية ذات 12 بت أن الأقل يعني ظلامًا أكثر. عكس مقسّم الجهد الفعلي يعكس العلاقة. هذه قيم خام وليست لوكس.")}</p><label for="raw">${text("Simulated raw reading", "القراءة الخام المحاكية")}: <output id="raw-value">1250</output></label><input id="raw" type="range" min="0" max="4095" value="1250"><label for="threshold">${text("Threshold", "العتبة")}: <output id="threshold-value">1800</output></label><input id="threshold" type="range" min="0" max="4095" value="1800"><p id="decision" aria-live="polite"></p><pre id="sensor-json"></pre></section>`;
@@ -191,6 +210,7 @@
     $("connect").disabled = wsState !== "CLOSED";
     $("send").disabled = wsState !== "OPEN" || wsBusy;
     $("disconnect").disabled = wsState !== "OPEN";
+    isolateText($("ws-log"));
   }
   function route(focus = false) {
     clearTimeout(timer);
@@ -206,7 +226,7 @@
         : l
           ? id === "projects"
             ? window.renderProjects(
-                { t, text, escape, prose, link, codeBlock, memory },
+                { t, text, format, escape, prose, link, codeBlock, memory },
                 bits[1],
               )
             : lesson(l)
@@ -220,6 +240,7 @@
     }
     updateSensor();
     wsUI();
+    isolateText(document.body);
     $("sidebar").classList.remove("open");
     $("menu").setAttribute("aria-expanded", "false");
     if (focus) $("main").focus({ preventScroll: true });
@@ -235,6 +256,13 @@
       .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
       .replace(/[أإآ]/g, "ا");
   }
+  function excerpt(s) {
+    if (s.length <= 120) return s;
+    let short = s.slice(0, 120);
+    // Avoid cutting through an English gloss in a search result.
+    if (short.lastIndexOf("(") > short.lastIndexOf(")")) short = short.slice(0, short.lastIndexOf("("));
+    return short.slice(0, short.lastIndexOf(" "));
+  }
   function search() {
     const query = normalize($("search").value.trim());
     if (!query) {
@@ -246,7 +274,8 @@
       ...lessons,
       ...projects.map((p) => ({ ...p, id: "projects/" + p.id })),
     ].filter((l) => {
-      const hay = normalize(JSON.stringify(l));
+      const hay = normalize(JSON.stringify(l, (_, value) =>
+        typeof value === "string" ? value + " " + (window.HUB_HE[value] || "") : value));
       return words.every((w) => hay.includes(w));
     });
     $("results").innerHTML = hits.length
@@ -254,13 +283,13 @@
         hits
           .map(
             (l) =>
-              `<a href="#${l.id}">${escape(t(l.title))}<small> — ${escape(t(l.intro).slice(0, 100))}…</small></a>`,
+              `<a href="#${l.id}">${prose(t(l.title))}<small> — ${prose(excerpt(t(l.intro)))}…</small></a>`,
           )
           .join("")
       : `<p>${text("No results. Try GPIO, JSON, server, or a shorter keyword in either language.", "لا توجد نتائج. جرّب GPIO أو JSON أو خادم، أو كلمة أقصر بأي من اللغتين.")}</p>`;
   }
-  $("language").addEventListener("click", () => {
-    lang = lang === "ar" ? "en" : "ar";
+  $("language").addEventListener("change", () => {
+    lang = $("language").value;
     save();
     route();
   });
@@ -274,7 +303,7 @@
       $("menu").setAttribute("aria-expanded", "false");
     }
   });
-  $("search").addEventListener("input", search);
+  $("search").addEventListener("input", () => { search(); isolateText($("results")); });
   $("reset").addEventListener("click", () => {
     if (
       confirm(
@@ -398,7 +427,7 @@
           .forEach((x) =>
             x.classList.toggle("stage", x.dataset.stage === stages[step]),
           );
-        $("ws-log").textContent = t(messages[step]);
+        $("ws-log").innerHTML = prose(t(messages[step]));
         step++;
         if (step < 3) timer = setTimeout(advance, 850);
         else {

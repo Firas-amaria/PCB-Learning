@@ -1,12 +1,13 @@
 # Deferred manual checks / فحوص يدوية مؤجلة
 
-No application, browser, or launcher runtime tests were run during implementation, per request.
-لم تُنفّذ اختبارات تشغيل التطبيق أو المتصفح أو المشغّل أثناء التنفيذ، حسب الطلب.
+Localization checks completed: 441 translated source strings, placeholder checks, and headless browser checks across 36 language/page combinations, including a narrow viewport, Hebrew search, language persistence, project checklist preservation, and both simulations. Launcher execution and the broader manual checks below remain untested.
+
+Developer checks: run `node tests/check-translations.cjs`. For browser regression checks, run `node tests/serve.cjs` and open `http://127.0.0.1:8765/tests/localization.html` in a disposable browser profile. This test resets progress on that test origin.
 
 - Copy the website folder to a path with spaces and Arabic characters. Open the EXE; confirm the browser opens and the launcher exits. Repeat with index.html directly.
 - Temporarily rename a required asset in a copy; check the launcher's missing-file message, then restore it.
 - Disconnect the internet. Visit home and all eight chapters; confirm all local assets, lessons, and demos work.
-- Switch Arabic/English within each section; verify preserved subject, RTL/LTR, code direction, labels, and mobile navigation.
+- Switch Arabic/English/Hebrew within each section; verify preserved subject, RTL/LTR, code direction, labels, and mobile navigation.
 - Search both languages (e.g. خادم, threshold, GPIO); try no results; follow results.
 - Try #http/checklist, #home/subjects, previous/next, browser back/forward, and an unknown hash.
 - Tick checklists, reload, change language, reset with cancel and then confirmation.

@@ -14,7 +14,7 @@ const milestones = [
   ],
   [
     "Run the project server on the computer and test one valid request and its response.",
-    "شغّل خادم المشروع على الحاسوب واختبر طلبًا صالحًا واحدًا واستجابته.",
+    "شغّل خادم المشروع (Server) على الحاسوب واختبر طلبًا صالحًا واحدًا واستجابته.",
   ],
   [
     "Connect the ESP32 over Wi-Fi using the computer’s reachable address; show connection status.",
@@ -74,7 +74,7 @@ window.HUB_PROJECTS = [
       ],
       [
         "Server: validate requests, assign request IDs, and maintain current state.",
-        "الخادم: التحقق من الطلبات وتعيين معرّفاتها وحفظ حالتها الحالية.",
+        "الخادم (Server): التحقق من الطلبات وتعيين معرّفاتها وحفظ حالتها الحالية.",
       ],
       [
         "Website: list requests and allow the receptionist to mark them completed.",
@@ -188,7 +188,7 @@ window.HUB_PROJECTS = [
       ],
       [
         "Server: own the queue state, validate actions, and apply each accepted action once.",
-        "الخادم: إدارة حالة الدور والتحقق من الإجراءات وتطبيق كل إجراء مقبول مرة واحدة.",
+        "الخادم (Server): إدارة حالة الدور والتحقق من الإجراءات وتطبيق كل إجراء مقبول مرة واحدة.",
       ],
       [
         "Website: provide Next and confirmed Reset controls and show returned state.",
@@ -291,7 +291,7 @@ window.HUB_PROJECTS = [
       ],
       [
         "A touch submits a choice; the server validates it and records at most one vote per device for that poll.",
-        "ترسل اللمسة اختيارًا؛ ويتحقق الخادم منه ويسجل صوتًا واحدًا كحد أقصى لكل جهاز في الاستطلاع.",
+        "ترسل اللمسة اختيارًا؛ ويتحقق الخادم منه ويسجل صوتًا واحدًا كحد أقصى لكل جهاز في الاستطلاع (Poll).",
       ],
       [
         "The website displays totals; the device confirms acceptance only after a successful server response.",
@@ -301,11 +301,11 @@ window.HUB_PROJECTS = [
     roles: [
       [
         "ESP32: show the active poll, submit the selected choice, and display acceptance or an error.",
-        "ESP32: عرض الاستطلاع النشط وإرسال الخيار المحدد وإظهار القبول أو الخطأ.",
+        "ESP32: عرض الاستطلاع (Poll) النشط وإرسال الخيار المحدد وإظهار القبول أو الخطأ.",
       ],
       [
         "Server: manage the poll and its open/closed state, validate votes, enforce uniqueness, and calculate totals.",
-        "الخادم: إدارة الاستطلاع وحالته المفتوحة أو المغلقة والتحقق من الأصوات وفرض عدم تكرارها وحساب الإجماليات.",
+        "الخادم (Server): إدارة الاستطلاع (Poll) وحالته المفتوحة أو المغلقة والتحقق من الأصوات وفرض عدم تكرارها وحساب الإجماليات.",
       ],
       [
         "Website: provide teacher question and open/close controls and display results.",

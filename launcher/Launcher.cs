@@ -9,7 +9,7 @@ internal static class Launcher
     private static void Main()
     {
         string root = AppDomain.CurrentDomain.BaseDirectory;
-        string[] required = { "index.html", "assets/style.css", "assets/lessons.js", "assets/app.js", "assets/projects.js", "assets/project-view.js" };
+        string[] required = { "index.html", "assets/style.css", "assets/lessons.js", "assets/app.js", "assets/projects.js", "assets/project-view.js", "assets/hebrew.js" };
         foreach (string relative in required)
         {
             if (!File.Exists(Path.Combine(root, relative)))

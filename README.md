@@ -1,6 +1,6 @@
 # Embedded Learning Hub | دليل الأنظمة المدمجة
 
-An offline, bilingual reference for beginner ESP32 students. Eight chapters: seven subjects and three project briefs, English/Arabic search, separate optional project checklists, and two interactive simulations. No student installation, account, server, or package manager is needed.
+An offline reference in Arabic, English, and Hebrew for beginner ESP32 students. Eight chapters: seven subjects and three project briefs, search across all three languages, separate optional project checklists, and two interactive simulations. No student installation, account, server, or package manager is needed. Arabic and Hebrew use RTL text with English technical terms beside translated terminology.
 
 مرجع عربي وإنجليزي يعمل دون إنترنت لطلاب ESP32 المبتدئين. ثمانية فصول: سبعة مواضيع وثلاث أفكار مشاريع، وبحث باللغتين، وقوائم مشاريع اختيارية منفصلة، ومحاكاتان تفاعليتان. لا يحتاج الطالب إلى تثبيت أدوات أو حساب أو خادم.
 
@@ -9,12 +9,14 @@ An offline, bilingual reference for beginner ESP32 students. Eight chapters: sev
 1. Clone or copy the repository folder; keep all website files together.
 2. On Windows, double-click **Open Learning Hub.exe**. It opens the default browser and exits.
 3. On any desktop platform, double-click **index.html** as the direct fallback.
-4. Arabic is the initial language; use **English** in the header to switch without leaving the subject.
+4. Arabic is the initial language; choose **العربية**, **English**, or **עברית** in the header without leaving the subject. The selected language is saved in this browser.
 
 5. استنسخ مجلد المستودع أو انسخه، واحتفظ بجميع ملفات الموقع معًا.
 6. في Windows انقر مرتين على **Open Learning Hub.exe**. يفتح المتصفح الافتراضي ثم ينتهي.
 7. يمكنك أيضًا النقر مرتين على **index.html** مباشرة.
-8. العربية هي اللغة الأولى؛ اضغط **English** للتبديل مع البقاء في الموضوع نفسه.
+8. العربية هي اللغة الأولى؛ اختر **العربية** أو **English** أو **עברית** من قائمة اللغة مع البقاء في الموضوع نفسه.
+
+המדריך זמין גם בעברית. בחרו **עברית** בתפריט השפה; השיעורים, הפרויקטים, החיפוש והסימולציות פועלים ללא אינטרנט. מונחים טכניים באנגלית מוצגים לצד העברית, והקוד נשאר משמאל לימין.
 
 The lessons, styles, code examples, search, and simulations are local. Only optional external reading needs internet. The learning website has no backend. Real HTTP/WebSocket examples require a separate instructor-provided server; simulations do not connect to hardware.
 
@@ -28,6 +30,7 @@ Progress is private to the current browser/profile. File URL storage behavior va
 
 - `assets/lessons.js`: all seven lessons. Text pairs are `[English, Arabic]`; preserve IDs to retain hashes and checklist keys. Each lesson defines concepts, example, exercise, troubleshooting, extra detail, checks, and resources.
 - `assets/app.js`: UI translations, rendering, search, storage, simulations. Use classic scripts, not imports or fetch, to preserve `file://` support.
+- `assets/hebrew.js`: Hebrew translations keyed by the exact English source text, including lesson and project text, interface labels, and external-resource descriptions. Update the corresponding Hebrew key if English text changes. Resource language labels describe the linked resource itself; no Hebrew external resources have been verified yet.
 - `assets/style.css`: responsive layout and RTL/LTR styling with logical properties.
 - `index.html`: entry point; no build step.
 

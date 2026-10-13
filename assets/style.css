@@ -24,12 +24,14 @@ a {
 }
 
 button,
-input {
+input,
+select {
     font: inherit
 }
 
 button,
-.button {
+.button,
+#language {
     cursor: pointer;
     border: 1px solid var(--line);
     background: white;
@@ -374,6 +376,11 @@ p code {
     background: #e2eae5;
     padding: 2px 5px;
     border-radius: 4px
+}
+
+/* Keep an English gloss and both parentheses together inside Arabic text. */
+.technical-term {
+    white-space: nowrap
 }
 
 details {
