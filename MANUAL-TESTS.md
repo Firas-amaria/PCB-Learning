@@ -2,8 +2,6 @@
 
 Localization checks completed: 441 translated source strings, placeholder checks, and headless browser checks across 36 language/page combinations, including a narrow viewport, Hebrew search, language persistence, project checklist preservation, and both simulations. Launcher execution and the broader manual checks below remain untested.
 
-Developer checks: run `node tests/check-translations.cjs`. For browser regression checks, run `node tests/serve.cjs` and open `http://127.0.0.1:8765/tests/localization.html` in a disposable browser profile. This test resets progress on that test origin.
-
 - Copy the website folder to a path with spaces and Arabic characters. Open the EXE; confirm the browser opens and the launcher exits. Repeat with index.html directly.
 - Temporarily rename a required asset in a copy; check the launcher's missing-file message, then restore it.
 - Disconnect the internet. Visit home and all eight chapters; confirm all local assets, lessons, and demos work.
